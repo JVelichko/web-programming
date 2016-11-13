@@ -12,6 +12,9 @@ class Indexer {
 
   def this(resourcePath: String) {
     this()
+
+
+
     booksIndex = new mutable.HashMap[String, String]
     wordsIndex = new mutable.HashMap[String, mutable.HashSet[String]]
     try getListOfFiles(resourcePath).foreach(initializeIndexer)

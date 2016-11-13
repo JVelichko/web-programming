@@ -6,8 +6,8 @@ import scala.collection.Set
 class RepresentMaker()
 {
   final private val bias: Integer = 10
-  val resourcePath: String = "C:\\Users\\admin\\Git\\web-programming\\NewGoogle\\src\\main\\resources"
-  val indexer: Indexer = IndexerScalaTrait.getInstance(resourcePath)
+  val resourcePath: String = getClass.getResource("/crutch.txt").getPath
+  val indexer: Indexer = IndexerScalaTrait.getInstance(resourcePath.substring(0,resourcePath.length - 11))
 
   def getDocNames(searchText: String): Array[String] = {
     indexer.getDocNames(searchText).toList.toArray
