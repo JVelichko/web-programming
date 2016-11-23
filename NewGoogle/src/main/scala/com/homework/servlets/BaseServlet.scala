@@ -3,12 +3,13 @@ package com.homework.servlets
 import java.io.{IOException, Writer}
 import javax.servlet.ServletException
 import javax.servlet.http.{HttpServletResponse, HttpServletRequest, HttpServlet}
-
 import com.google.gson.Gson
 import com.homework.models.{JsonPackage, RepresentMaker}
+import java.util.regex.Pattern
+import scala.collection.Set
 
 class BaseServlet extends HttpServlet {
-  private var representer: RepresentMaker = null
+  private var representer: RepresentMaker = _
 
   override def init() {
     representer = new RepresentMaker
@@ -32,8 +33,12 @@ class BaseServlet extends HttpServlet {
       response.setContentType("text/plain")
       response.setCharacterEncoding("UTF-8")
       try {
-        val docsNames: Array[String] = representer.getDocNames(searchText)
-        val textInDocs: Array[String] = representer.getTextInDocs(searchText)
+        //val docsNames: Array[String] = representer.getDocNames(searchText)
+        val docNamesSet: Set[String] = representer.getDocNames(searchText)
+        val docsNames: Array[String] = docNamesSet.toList.toArray
+         //
+
+        val textInDocs: Array[String] = representer.getTextInDocs(docNamesSet, searchText)
         if (docsNames.length != 0) {
           writer.write(new Gson().toJson(new JsonPackage("found", docsNames, textInDocs)))
         }

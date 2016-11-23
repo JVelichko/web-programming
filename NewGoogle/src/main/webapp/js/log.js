@@ -6,6 +6,6 @@ $(document).ready(function () {
 
  function refreshText(){
         $("#target").load("log.txt", function(){
-           setTimeout(refreshText, 5000);
+           setTimeout(refreshText, 2000);
         });
     }

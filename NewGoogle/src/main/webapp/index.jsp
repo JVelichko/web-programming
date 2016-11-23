@@ -37,17 +37,7 @@
                     </div>
                 </div>
             </div>
+            <a href="log.jsp" class="btn btn-info" role="button">Logs</a>
         </div>
-
-         <!--
-                                        <div class = "searcher">
-                                            <input class="searcherText" type="text" id="searchText">
-                                            <button value="Search" id="search"><span>Search</span></button>
-                                            <div class="result">
-                                                            <textarea id="result"></textarea>
-                                                        </div>
-                                        </div> -->
-
-
     </body>
 </html>

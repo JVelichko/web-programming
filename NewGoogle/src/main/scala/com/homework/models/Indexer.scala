@@ -60,8 +60,11 @@ class Indexer {
       searchWords.forall(word =>
         wordsIndex.getOrElse(word, mutable.HashSet()).contains(book)))
 
+    //println("kwewfoikjewfoikjfew")
     if(temp.nonEmpty){
+      println(hack)
       val fw = new FileWriter(hack, true) ;
+
       fw.write("someone was looking for: " + searchText + "\n") ;
       fw.close()
     }
