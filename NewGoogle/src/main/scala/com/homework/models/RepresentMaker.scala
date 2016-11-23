@@ -7,6 +7,7 @@ class RepresentMaker()
 {
   final private val bias: Integer = 10
   val resourcePath: String = getClass.getResource("/crutch.txt").getPath
+  //println(resourcePath.substring(0,resourcePath.length - 18))
   val indexer: Indexer = IndexerScalaTrait.getInstance(resourcePath.substring(0,resourcePath.length - 11))
 
   def getDocNames(searchText: String): Array[String] = {
