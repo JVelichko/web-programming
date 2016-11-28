@@ -1,11 +1,11 @@
 $(document).ready(function () {
-    $( "#target" ).load( "log.txt" );
+    $( "#target" ).load( "log.out" );
      refreshText();
 
 });
 
  function refreshText(){
-        $("#target").load("log.txt", function(){
+        $("#target").load("log.out", function(){
            setTimeout(refreshText, 2000);
         });
     }

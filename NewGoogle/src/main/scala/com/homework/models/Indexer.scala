@@ -2,6 +2,8 @@ package com.homework.models
 
 import java.io.{BufferedWriter, File, FileWriter}
 
+import org.apache.log4j.{Level, FileAppender, SimpleLayout, Logger}
+
 import scala.collection.{Set, mutable}
 import scala.io.Source._
 import java.util.regex.Pattern
@@ -10,12 +12,21 @@ import java.util.regex.Pattern
 class Indexer {
   private var booksIndex: mutable.HashMap[String, String] = _
   private var wordsIndex: mutable.HashMap[String, mutable.HashSet[String]] = _
+  private val logger: Logger = Logger.getLogger(classOf[Indexer])
+
+
   private var hack: String = _
 
   def this(resourcePath: String) {
     this()
-    //println(resourcePath.substring(0,resourcePath.length - 7))
-    hack = resourcePath.substring(0,resourcePath.length - 15) ++ "log.txt"
+    hack = resourcePath.substring(0,resourcePath.length - 15) ++ "log.out"
+
+    val layout: SimpleLayout = new SimpleLayout
+    val appender: FileAppender = new FileAppender(layout, hack, false)
+    logger.addAppender(appender)
+    logger.setLevel(Level.DEBUG)
+
+
     booksIndex = new mutable.HashMap[String, String]
     wordsIndex = new mutable.HashMap[String, mutable.HashSet[String]]
     try getListOfFiles(resourcePath).foreach(initializeIndexer)
@@ -60,13 +71,12 @@ class Indexer {
       searchWords.forall(word =>
         wordsIndex.getOrElse(word, mutable.HashSet()).contains(book)))
 
-    //println("kwewfoikjewfoikjfew")
     if(temp.nonEmpty){
-      println(hack)
-      val fw = new FileWriter(hack, true) ;
+      //val fw = new FileWriter(hack, true)
 
-      fw.write("someone was looking for: " + searchText + "\n") ;
-      fw.close()
+      logger.debug("someone was looking for: " + searchText + "\n")
+      //fw.write("someone was looking for: " + searchText + "\n") ;
+      //fw.close()
     }
     temp
   }
